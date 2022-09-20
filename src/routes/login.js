@@ -1,7 +1,7 @@
 import { onNavigate } from '../main.js';
 
 export const login = () => {
-// section main of login padre
+  // section main of login padre
   const mainLogin = document.createElement('main');
   mainLogin.setAttribute('class', 'login-main');
   const sectionLogin = document.createElement('section');
@@ -51,7 +51,9 @@ export const login = () => {
   buttonRegister.addEventListener('click', () => {
     onNavigate('/register'); // falta el archivo de registro
   });
-
+  buttonLogin.addEventListener('click', () => {
+    return onNavigate('/timeline');
+  });
   // appends the inputs to main
   sectionInputs.append(animalPawnet, inputEmail, email, inputPassWord, pasword);
   // appends the section lines
