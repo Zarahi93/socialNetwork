@@ -50,6 +50,9 @@ export const login = () => {
   buttonRegister.setAttribute('id', 'register');
   buttonRegister.setAttribute('class', 'register-button');
 
+  const googleButton = document.createElement('button');
+  googleButton.setAttribute('class', 'googleLogin');
+
   const textRegister = document.createElement('p');
   textRegister.setAttribute('class', 'textRegister');
   textRegister.textContent = '¿No tienes cuenta?';
@@ -74,8 +77,6 @@ export const login = () => {
         loginError.innerHTML = 'Email o contraseña no válido';
       });
   });
-  const googleButton = document.createElement('button');
-  googleButton.setAttribute('class', 'googleLogin');
 
   googleButton.addEventListener('click', () => {
     signInWithPopup(auth, googleProvider)
@@ -99,7 +100,7 @@ export const login = () => {
   // appends the section lines
   sectionLinesHr.append(hrLeft, leterSec, hrRight);
   // appends the buttons to the main tag
-  divloginButtons.append( googleButton, textRegister, buttonRegister);
+  divloginButtons.append(googleButton, textRegister, buttonRegister);
 
   sectionLogin.append(sectionInputs, sectionLinesHr, divloginButtons);
 
