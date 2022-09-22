@@ -1,208 +1,116 @@
+/*****DO NOT MODIFY FROM HERE*****/
+
 @import url('http://fonts.cdnfonts.com/css/jenna-sue');
 * {   /* selectoe universar para eliminar todos espacios que viene por defecto en los navegadores debido a las etiquetas*/ 
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     box-sizing: border-box;
      /*margin, border y padding pasan a formar parte del cálculo del ancho de la caja y no lo suman posteriormente*/
 }
 body {
     height: 100vh;
-    /*background-color: blueviolet;*/
 }
 /*Login style begins*/
-.login-main {
+.main {
     background-image: url('./images/registro_fondo.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-	height: 100vh;
+    background-repeat: no-repeat; background-size: cover;
+    width: 100vw; height: 100vh;
 }
-.section_login {
-display: flex;
-position: absolute;
-left: 12.38%;
-right: 12.69%;
-top: 18%;
-bottom: 10.32%;
-background: rgba(198, 207, 255, 0.5);
-border-radius: 18px;
-flex-flow: column wrap;
-padding: 3vw;
-align-items: center;
-}
-
 .animalPawnet {
     position: absolute;
-    left: 28%;
-    top: 8%;
+    left: 28%; top: 8%;
     font-family: 'Jenna Sue', sans-serif;
-    font-weight: 250;
-    font-size: 13vw;   
-    margin: 1vw;     
-    text-shadow: 4px 4px 4px #C6CFFF;   
+    font-weight: 250; font-size: 13vw;   
+    margin: 1vw; text-shadow: 4px 4px 4px #C6CFFF;   
+}
+
+.section_login_register {
+display: flex; position: absolute; 
+left: 12.38%; right: 12.69%; top: 18%; bottom: 10.32%;
+background: rgba(198, 207, 255, 0.5);
+border-radius: 18px; padding: 3vw;
+flex-flow: column wrap; align-items: center;
 }
 
 .inputs {
-    width: 50vw;
-    height: 3vh;
-    margin-top: 8vw;
-    border: none;
-    border-bottom: 1px solid black;
+    width: 50vw; height: 3vh; margin-top: 8vw;
+    border: none; border-bottom: 1px solid black;
     background-color: rgba(198, 206, 255, 0);
 }
 
 .sectionLinesHr {
-    margin-top: 5vw;
-    margin-bottom: 5vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    margin-top: 5vw; margin-bottom: 5vw;
+    display: flex; flex-direction: row; justify-content: center;
 }
 
 .hrSecLog {
-    height: 1px;
-    width: 35vw;
-    bottom: 10%;
-    background-color: black;
-    margin: 5%;
-    border: #000000;
+    height: 1px; width: 35vw; bottom: 10%; margin: 5%;
+    background-color: black; border: #000000;
 }
 
-p{
+.p{
     margin-top: 1vw;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 550;
-    font-size: 4.5vw;
-    display: flex;
-    align-items: center;
+    font-family: 'Inter'; font-style: normal;
+    font-weight: 550; font-size: 4.5vw;
+    display: flex; align-items: center;
     color: #000000;
 }
 
 .register-buttons-div{
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
+  display: flex; flex-flow: column wrap;
+  align-items: center; justify-content: center;
   }
 
 #log-in {
-    height: 6vh;
-    width: 40vw;
-    background: #C6CFFF;
-    border-radius: 18px;
-    font-family: 'Francois One';
-    font-size: 4.5vw;
+    height: 6vh; width: 40vw;
+    background: #C6CFFF; border-radius: 18px;
+    font-family: 'Francois One'; font-size: 4.5vw;
+    margin-top: 2vh; margin-left: 4.5vw;
     color: #000000;
-    margin-top: 2vh;
-    margin-left: 4.5vw;
 }
 .googleLogin{
     background-image: url('./googleB/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png');
-    width: 49vw;
-    height: 6.5vh;
-    background-size:100%;
-    border: none;
-    background-color: #FFFFFF;
-    margin-bottom: 4vh;
+    width: 49vw; height: 6.5vh;
+    background-size:100%; background-color: #FFFFFF;
+    border: none; margin-bottom: 4vh;
 }
 
 .googleLogin:hover{
     background-image: url('./googleB/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png');
-    width: 49vw;
-    height: 6.5vh;
-    background-size:100%;
-    border: none;
-    background-color: #ffffff06;
-    background-repeat: no-repeat;
-  }
-
-.textRegister{
-    margin-bottom: 2vh;
+    width: 49vw; height: 6.5vh; border: none;
+    background-size:100%; background-color: #ffffff06; background-repeat: no-repeat;
 }
+
 #register {
-    height: 6vh;
-    width: 40vw;
-    background: #C6CFFF;
-    border-radius: 18px;
-    font-family: 'Francois One';
-    font-size: 4.5vw;
+    height: 6vh; width: 40vw; margin-top: 2vh;
+    background: #C6CFFF; border-radius: 18px;
+    font-family: 'Francois One'; font-size: 4.5vw;
     color: #000000;
 }
-
+.error{
+    font-family: 'Inter'; font-style: normal;
+    font-weight: 800; font-size: 4vw;
+    display: flex; align-items: center;
+    color: #790252; margin-top: 5vw;
+}
 /*Login style ends*/
 
-
-/*Register style begins*/
-
-.mainRegister{
-    background-image: url('./images/registro_fondo.jpg');
-    background-repeat: no-repeat;
-    background-size:cover;
-    width: 100vw;
-	height: 100vh;
-}
-
-.sectionRegister{
-display: flex;
-position: absolute;
-left: 12.38%;
-right: 12.69%;
-top: 18%;
-bottom: 10.32%;
-background: rgba(198, 207, 255, 0.5);
-border-radius: 18px;
-flex-flow: column wrap;
-padding: 3vw;
-align-items: center;
-}
-
-/* .p{
-margin-top: 1vw;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 550;
-font-size: 4.5vw;
-display: flex;
-align-items: center;
-color: #000000;
-} */
-
+/*Differences between register and login page style begins*/
 .inputRegister {
-    width: 50vw;
-    height: 3vh;
-    margin-top: 17vw;
-    border: none;
-    border-bottom: 1px solid black;
+    width: 50vw; height: 3vh; margin-top: 17vw;
+    border: none; border-bottom: 1px solid black;
     background-color: rgba(198, 206, 255, 0);
-  }
+}
 
 .registerButton{
-    height: 6vh;
-    width: 40vw;
-    margin-top: 30vw;
-    background: #C6CFFF;
-    border-radius: 18px;
-    font-family: 'Francois One';
-    font-size: 4.5vw;
-    color: #000000;
-    }
-    .error{
-        margin-top: 5vw;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 800;
-        font-size: 4.5vw;
-        display: flex;
-        align-items: center;
-        color: #790252;  
-    }
-    
-  /*Register style ends*/
+    height: 6vh; width: 40vw; margin-top: 30vw;
+    font-family: 'Francois One'; font-size: 4.5vw;
+    border-radius: 18px; background: #C6CFFF; color: #000000;
+}
+  /*Differences between register and login page style ends*/
 
-/*TIMELINE STYLES BEGIN*/
+  /*****TO HERE*****/
 
-
+  /*TIMELINE STYLES BEGIN*/
 .timeLineMainContainer{
     background-color: #F3F8FF;
     height: 100vh;

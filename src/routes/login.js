@@ -6,14 +6,14 @@ import { signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.9.3/fireba
 export const login = () => {
   // section main of login padre
   const mainLogin = document.createElement('main');
-  mainLogin.setAttribute('class', 'login-main');
+  mainLogin.setAttribute('class', 'main');
   const sectionLogin = document.createElement('section');
-  sectionLogin.setAttribute('class', 'section_login');
+  sectionLogin.setAttribute('class', 'section_login_register');
   // add the buttons of login or register este lo cambio a mi nodo padre?
   const divloginButtons = document.createElement('div');
   divloginButtons.setAttribute('class', 'register-buttons-div');
   const sectionInputs = document.createElement('section');
-  sectionInputs.setAttribute('class', 'section_imputs');
+  sectionInputs.setAttribute('class', 'section_inputs');
   const sectionLinesHr = document.createElement('section');
   sectionLinesHr.setAttribute('class', 'sectionLinesHr');
 
@@ -24,13 +24,15 @@ export const login = () => {
   inputEmail.setAttribute('id', 'inputEmail');
   inputEmail.setAttribute('class', 'inputs');
   const textEmail = document.createElement('p');
+  textEmail.setAttribute('class', 'p');
   textEmail.textContent = 'Email';
   const inputPassWord = document.createElement('input');
   inputPassWord.setAttribute('class', 'inputs');
   inputPassWord.setAttribute('id', 'inputPassword');
   inputPassWord.setAttribute('type', 'password');
-  const textPasword = document.createElement('p');
-  textPasword.textContent = 'Contraseña';
+  const textPassword = document.createElement('p');
+  textPassword.setAttribute('class', 'p');
+  textPassword.textContent = 'Contraseña';
 
   const buttonLogin = document.createElement('button');
   buttonLogin.setAttribute('id', 'log-in');
@@ -40,7 +42,7 @@ export const login = () => {
   const hrLeft = document.createElement('hr');
   hrLeft.setAttribute('class', 'hrSecLog');
   const leterSec = document.createElement('p');
-  leterSec.setAttribute('class', 'pLetSec');
+  leterSec.setAttribute('class', 'p');
   leterSec.textContent = 'ó';
   const hrRight = document.createElement('hr');
   hrRight.setAttribute('class', 'hrSecLog');
@@ -54,7 +56,7 @@ export const login = () => {
   googleButton.setAttribute('class', 'googleLogin');
 
   const textRegister = document.createElement('p');
-  textRegister.setAttribute('class', 'textRegister');
+  textRegister.setAttribute('class', 'p');
   textRegister.textContent = '¿No tienes cuenta?';
 
   buttonRegister.addEventListener('click', () => {
@@ -96,7 +98,7 @@ export const login = () => {
   });
 
   // appends the inputs to main
-  sectionInputs.append(inputEmail, textEmail, inputPassWord, textPasword, loginError, buttonLogin);
+  sectionInputs.append(inputEmail, textEmail, inputPassWord, textPassword, loginError, buttonLogin);
   // appends the section lines
   sectionLinesHr.append(hrLeft, leterSec, hrRight);
   // appends the buttons to the main tag

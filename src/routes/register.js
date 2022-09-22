@@ -4,18 +4,13 @@ import { addUser, auth, googleProvider } from '../lib/auth.js';
 
 export const register = () => {
   const mainRegister = document.createElement('main');
-  mainRegister.setAttribute('class', 'mainRegister');
-  const sectionInput = document.createElement('section');
-  sectionInput.setAttribute('class', 'sectionInput');
-  const sectionLine = document.createElement('section');
-  sectionLine.setAttribute('class', 'sectionLine');
-  const sectionAll = document.createElement('section');
-  sectionAll.setAttribute('class', 'sectionRegister');
-  const registerButton = document.createElement('button');
-  registerButton.setAttribute('class', 'registerButton');
-
+  mainRegister.setAttribute('class', 'main');
   const title = document.createElement('h2');
   title.setAttribute('class', 'animalPawnet');
+  const sectionAll = document.createElement('section');
+  sectionAll.setAttribute('class', 'section_login_register');
+  const sectionInput = document.createElement('section');
+  sectionInput.setAttribute('class', 'sectionInput');
   const email = document.createElement('input');
   email.setAttribute('class', 'inputRegister');
   const emailOne = document.createElement('p');
@@ -27,6 +22,9 @@ export const register = () => {
   passOne.setAttribute('class', 'p');
   const pMessage = document.createElement('p');
   pMessage.setAttribute('class', 'error');
+  const registerButton = document.createElement('button');
+  registerButton.setAttribute('class', 'registerButton');
+
 
   title.textContent = 'Animal Pawnet';
   registerButton.textContent = 'Registrate';
