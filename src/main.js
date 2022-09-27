@@ -24,8 +24,9 @@ export const onNavigate = (pathname) => {
 };
 console.log(window.location.pathname);
 let path = window.location.pathname;
-if (path === undefined) {
+if (typeof path === 'undefined') {
   path = '/';
+  console.log(path);
 }
 
 const pages = routes[path]; // Render to "/"
