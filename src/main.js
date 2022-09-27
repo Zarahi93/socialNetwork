@@ -23,7 +23,7 @@ export const onNavigate = (pathname) => {
   root.appendChild(routes[pathname]()); // Run the function to enter the pathname received
 };
 const pages = routes[window.location.pathname]; // Render to "/"
-
+console.log(pages);
 window.onpopstate = () => {
   root.removeChild(root.firstChild);
   root.append(pages());
