@@ -6,6 +6,7 @@ import { addUser, auth, googleProvider } from '../lib/auth.js';
 export const register = () => {
   const mainRegister = document.createElement('main');
   mainRegister.setAttribute('class', 'main');
+
   const sectionInput = document.createElement('section');
   sectionInput.setAttribute('class', 'sectionInput');
   const sectionLine = document.createElement('section');
@@ -17,6 +18,7 @@ export const register = () => {
 
   const title = document.createElement('h2');
   title.setAttribute('class', 'animal-pawnet');
+  
   const email = document.createElement('input');
   email.setAttribute('class', 'input-register');
   email.setAttribute('id', 'userEmail');
@@ -29,6 +31,9 @@ export const register = () => {
   passOne.setAttribute('class', 'p');
   const pMessage = document.createElement('p');
   pMessage.setAttribute('class', 'error');
+  const registerButton = document.createElement('button');
+  registerButton.setAttribute('class', 'registerButton');
+
 
   title.textContent = 'Animal Pawnet';
   registerButton.textContent = 'Registrate';

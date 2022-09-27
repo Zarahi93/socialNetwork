@@ -3,8 +3,8 @@ import { savePost, getPosts, onGetPosts } from '../lib/firestore.js';
 // Creating elements
 export const timeLine = () => {
   // contenedor principal de los otros dos divs*/
-  const timeLineMainContainer = document.createElement('section');
-  const timeLineContainer = document.createElement('article');
+  const timeLineMainContainer = document.createElement('main');
+  const timeLineContainer = document.createElement('section');
 
   const postUserContainer = document.createElement('article');
   const inputWrapper = document.createElement('div');
@@ -15,7 +15,8 @@ export const timeLine = () => {
   const feed = document.createElement('div');
   // const userPost = document.createElement('div');
 
-  const userNameContainer = document.createElement('div');
+
+  const userNameContainer = document.createElement('section');
   const userName = document.createElement('h4');
   const userPicture = document.createElement('img');
 
@@ -32,7 +33,7 @@ export const timeLine = () => {
   navBarItems_2.classList.add('iconsNavBar');
   navBarItems_3.classList.add('iconsNavBar');
 
-  const menuBarIconsContainer = document.createElement('div');
+  const menuBarIconsContainer = document.createElement('nav');
 
   /* adding classes */
   /* dentro de maintimeline debe estar */
@@ -96,14 +97,16 @@ export const timeLine = () => {
     postUserContainer,
     userNameContainer,
     contentPostContainer,
-    iconsContainer
+
+iconsContainer
   );*/
+
   navBarItems_1.append(menuBarImages_1, navBarText_1);
   navBarItems_2.append(menuBarImages_2, navBarText_2);
   navBarItems_3.append(menuBarImages_3, navBarText_3);
   menuBarIconsContainer.append(navBarItems_1, navBarItems_2, navBarItems_3);
-  timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
-  timeLineMainContainer.append(timeLineContainer);
+  timeLineContainer.append(postUserContainer, feed);
+  timeLineMainContainer.append(timeLineContainer,menuBarIconsContainer);
 
   postingButton.addEventListener('click', () => {
     const userPost = inputText.value;

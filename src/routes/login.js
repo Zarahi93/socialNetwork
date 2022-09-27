@@ -12,7 +12,7 @@ export const login = () => {
   const divloginButtons = document.createElement('div');
   divloginButtons.setAttribute('class', 'register-buttons-div');
   const sectionInputs = document.createElement('section');
-  sectionInputs.setAttribute('class', 'section_imputs');
+  sectionInputs.setAttribute('class', 'section_inputs');
   const sectionLinesHr = document.createElement('section');
   sectionLinesHr.setAttribute('class', 'section-lines-hr');
 
@@ -23,13 +23,15 @@ export const login = () => {
   inputEmail.setAttribute('id', 'inputEmail');
   inputEmail.setAttribute('class', 'inputs');
   const textEmail = document.createElement('p');
+  textEmail.setAttribute('class', 'p');
   textEmail.textContent = 'Email';
   const inputPassWord = document.createElement('input');
   inputPassWord.setAttribute('class', 'inputs');
   inputPassWord.setAttribute('id', 'inputPassword');
   inputPassWord.setAttribute('type', 'password');
-  const textPasword = document.createElement('p');
-  textPasword.textContent = 'Contraseña';
+  const textPassword = document.createElement('p');
+  textPassword.setAttribute('class', 'p');
+  textPassword.textContent = 'Contraseña';
 
   const buttonLogin = document.createElement('button');
   buttonLogin.setAttribute('id', 'log-in');
@@ -39,7 +41,8 @@ export const login = () => {
   const hrLeft = document.createElement('hr');
   hrLeft.setAttribute('class', 'hr-sec-log');
   const leterSec = document.createElement('p');
-  leterSec.setAttribute('class', '.p');
+
+  leterSec.setAttribute('class', 'p');
   leterSec.textContent = 'ó';
   const hrRight = document.createElement('hr');
   hrRight.setAttribute('class', 'hr-sec-log');
@@ -49,8 +52,12 @@ export const login = () => {
   buttonRegister.setAttribute('id', 'register');
   buttonRegister.setAttribute('class', 'go-register-button');
 
+  const googleButton = document.createElement('button');
+  googleButton.setAttribute('class', 'googleLogin');
+
   const textRegister = document.createElement('p');
   textRegister.setAttribute('class', 'text-register');
+
   textRegister.textContent = '¿No tienes cuenta?';
 
   buttonRegister.addEventListener('click', () => {
@@ -75,6 +82,7 @@ export const login = () => {
   });
   const googleButton = document.createElement('button');
   googleButton.setAttribute('class', 'google-login');
+
 
   googleButton.addEventListener('click', () => {
     signInWithPopup(auth, googleProvider)
@@ -108,7 +116,7 @@ export const login = () => {
     }
   });
   // appends the inputs to main
-  sectionInputs.append(inputEmail, textEmail, inputPassWord, textPasword, loginError, buttonLogin);
+  sectionInputs.append(inputEmail, textEmail, inputPassWord, textPassword, loginError, buttonLogin);
   // appends the section lines
   sectionLinesHr.append(hrLeft, leterSec, hrRight);
   // appends the buttons to the main tag
