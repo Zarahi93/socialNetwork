@@ -1,4 +1,5 @@
 import { savePost, getPosts, onGetPosts } from '../lib/firestore.js';
+import { auth } from '../lib/auth.js';
 
 // Creating elements
 export const timeLine = () => {
@@ -107,7 +108,9 @@ export const timeLine = () => {
 
   postingButton.addEventListener('click', () => {
     const userPost = inputText.value;
-    savePost(userPost);
+    const user = auth.currentUser;
+    const userEmail = user.email;
+    savePost(userEmail, userPost);
   });
 
   window.addEventListener('DOMContentLoaded', async (e) => {
@@ -121,10 +124,10 @@ export const timeLine = () => {
       <div class="userPost">
       <div class = "userNameContainer">
       <img class="userPicture" src="./images/usuario.png">
-      <h4 class="userName">Nombre Usuario</h4>
+      <h4 class="userName">${post.userEmail}</h4>
        </div>
       <div class = "contentPostContainer">
-      <p>${post.inputText}</p>
+      <p>${post.userPost}</p>
       </div>
       <div class=iconsContainer> 
       <img class="iconImages" src="./images/bin.png">
