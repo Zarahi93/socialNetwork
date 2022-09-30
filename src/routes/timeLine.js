@@ -117,14 +117,6 @@ export const timeLine = () => {
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
-  function postButtonDisabled() {
-    postingButton.disabled = inputText.value === '';
-    inputText.addEventListener('input', () => {
-      postButtonDisabled();
-    });
-  }
-  postButtonDisabled();
-
   postingButton.addEventListener('click', () => {
     const userPost = inputText.value;
     const user = auth.currentUser;
@@ -157,6 +149,14 @@ export const timeLine = () => {
       });
     });
   });
+
+  /* function postButtonDisabled() {
+    postingButton.disabled = inputText.value === '';
+    inputText.addEventListener('input', () => {
+      postButtonDisabled();
+    });
+  }
+  postButtonDisabled(); */
 
   // const posts = await getPosts();
   // console.log(posts);
