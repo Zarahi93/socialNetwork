@@ -42,10 +42,12 @@ export const timeLine = () => {
   postUserContainer.classList.add('createPostTLContainer');
   inputWrapper.classList.add('inputWrapper');
   inputText.classList.add('inputText');
+  inputText.spellcheck = true;
   postingButton.classList.add('postButton');
+  postingButton.setAttribute('id', 'create-post');
 
   feed.classList.add('feedContainer');
-  //userPost.classList.add('userPost');
+  // userPost.classList.add('userPost');
   userNameContainer.classList.add('userNameContainer');
   userName.classList.add('userName');
   userPicture.classList.add('userPicture');
@@ -75,10 +77,10 @@ export const timeLine = () => {
   menuBarImages_3.classList.add('menuBarImages');
 
   // inputText.type = 'text';
-  postingButton.textContent = 'publicar';
+  postingButton.textContent = 'Publicar';
   userPicture.src = './images/usuario.png';
   userPostPicture.src = './images/usuario.png';
-  //userName.textContent = 'Adahi Gallardo';
+  // userName.textContent = 'Adahi Gallardo';
   iconsImages_1.src = './images/bin.png';
   iconsImages_2.src = './images/editar.png';
   iconsImages_3.src = './images/heart.png';
@@ -92,13 +94,13 @@ export const timeLine = () => {
   postUserContainer.append(userPostPicture, inputWrapper);
   userNameContainer.append(userPicture, userName);
   iconsContainer.append(iconsImages_1, iconsImages_2, iconsImages_3);
-  //feed.append(userPost);
+  // feed.append(userPost);
   /* userPost.append(
     postUserContainer,
     userNameContainer,
     contentPostContainer,
     iconsContainer
-  );*/
+  ); */
   navBarItems_1.append(menuBarImages_1, navBarText_1);
   navBarItems_2.append(menuBarImages_2, navBarText_2);
   navBarItems_3.append(menuBarImages_3, navBarText_3);
@@ -106,18 +108,50 @@ export const timeLine = () => {
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
+  function postButtonDisabled() {
+    postingButton.disabled = inputText.value === '';
+    inputText.addEventListener('input', () => {
+      postButtonDisabled();
+    });
+  }
+  postButtonDisabled();
+
   postingButton.addEventListener('click', () => {
     const userPost = inputText.value;
     const user = auth.currentUser;
     const userEmail = user.email;
     savePost(userEmail, userPost);
+    inputText.value = '';
   });
 
-  window.addEventListener('DOMContentLoaded', async (e) => {
+  window.addEventListener('DOMContentLoaded', async () => {
     // querySnapShop traer datos que existen en el momento
-    const posts = await getPosts();
-    console.log(posts);
-    posts.forEach((doc) => {
+    onGetPosts((posts) => {
+      posts.forEach((doc) => {
+        const post = doc.data();
+        // console.log(doc.data());
+        feed.innerHTML += `
+        <div class="userPost">
+        <div class = "userNameContainer">
+        <img class="userPicture" src="./images/usuario.png">
+        <h4 class="userName">${post.userEmail}</h4>
+         </div>
+        <div class = "contentPostContainer">
+        <p>${post.userPost}</p>
+        </div>
+        <div class=iconsContainer> 
+        <img class="iconImages" src="./images/bin.png">
+        <img class="iconImages" src="./images/editar.png">
+        <img class="iconImages" src="./images/heart.png">
+        <div>
+      <div> `;
+      });
+    });
+  });
+
+  // const posts = await getPosts();
+  // console.log(posts);
+  /* posts.forEach((doc) => {
       const post = doc.data();
       console.log(doc.data());
       feed.innerHTML += `
@@ -129,20 +163,21 @@ export const timeLine = () => {
       <div class = "contentPostContainer">
       <p>${post.userPost}</p>
       </div>
-      <div class=iconsContainer> 
+      <div class=iconsContainer>
       <img class="iconImages" src="./images/bin.png">
       <img class="iconImages" src="./images/editar.png">
       <img class="iconImages" src="./images/heart.png">
       <div>
     <div> `;
     });
-  });
-  //onGetTasks((querySnapshot) => {
-  //feed.innerHTML = "";
+  }); */
 
-  /*querySnapshot.forEach((doc) => {
+  // onGetTasks((querySnapshot) => {
+  // feed.innerHTML = "";
+
+  /* querySnapshot.forEach((doc) => {
       const task = doc.data();
-}*/
+} */
 
   return timeLineMainContainer;
 };

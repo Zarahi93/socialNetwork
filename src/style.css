@@ -229,6 +229,14 @@ body {
     border: none;
     border-radius: .5rem;
 }
+.postButton:hover{
+    width: 8rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    background-color: #C6CFFF;
+    border: none;
+    border-radius: .5rem;
+}
 .feedContainer{
     height: 60vh;
     width: 100%;

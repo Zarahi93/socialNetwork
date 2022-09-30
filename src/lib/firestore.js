@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import {
-  getFirestore, collection, addDoc, getDocs,
+  getFirestore, collection, addDoc, getDocs, onSnapshot
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 import { app } from './config.js';
 
@@ -12,4 +12,4 @@ export const savePost = (userEmail, userPost) => addDoc(collection(db, 'posts'),
 
 export const getPosts = () => getDocs(collection(db, 'posts'));
 
-export const onGetPosts = (callback) => onSnapshot(collection(db, 'post'));
+export const onGetPosts = (callback) => onSnapshot(collection(db, 'posts'), callback);

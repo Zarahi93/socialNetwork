@@ -18,7 +18,7 @@ export const onNavigate = (pathname) => {
   window.history.pushState(
     {}, // State
     pathname, // Title
-    window.location.origin + pathname // Domian or url
+    window.location.origin + pathname, // Domian or url
   );
   root.removeChild(root.firstChild); //
   root.appendChild(routes[pathname]()); // Run the function to enter the pathname received
