@@ -8,6 +8,7 @@ export const root = document.getElementById('root'); // In this node is where ev
 const routes = {
   // Object that contains the routes and what to render
   '/': login,
+  '/login': login,
   '/timeline': timeLine,
   '/register': register,
 };

@@ -1,4 +1,7 @@
-import { signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
+import {
+  signInWithPopup,
+  onAuthStateChanged,
+} from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
 import { onNavigate } from '../main.js';
 import { auth, signInUser, googleProvider } from '../lib/auth.js';
 
@@ -94,6 +97,7 @@ export const login = () => {
   });
 
   onAuthStateChanged(auth, (user) => {
+    console.log(user);
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
@@ -108,7 +112,14 @@ export const login = () => {
     }
   });
   // appends the inputs to main
-  sectionInputs.append(inputEmail, textEmail, inputPassWord, textPasword, loginError, buttonLogin);
+  sectionInputs.append(
+    inputEmail,
+    textEmail,
+    inputPassWord,
+    textPasword,
+    loginError,
+    buttonLogin
+  );
   // appends the section lines
   sectionLinesHr.append(hrLeft, leterSec, hrRight);
   // appends the buttons to the main tag
