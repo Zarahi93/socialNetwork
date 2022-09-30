@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyAl9F0rJ14doFfzi2GxMZ_8BOuCD_XQfHQ',
   authDomain: 'animal-pawnet.firebaseapp.com',
   projectId: 'animal-pawnet',

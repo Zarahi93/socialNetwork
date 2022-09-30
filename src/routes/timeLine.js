@@ -1,3 +1,6 @@
+import { savePost, getPosts, onGetPosts } from '../lib/firestore.js';
+import { auth } from '../lib/auth.js';
+
 // Creating elements
 export const timeLine = () => {
   // contenedor principal de los otros dos divs*/
@@ -6,11 +9,12 @@ export const timeLine = () => {
 
   const postUserContainer = document.createElement('article');
   const inputWrapper = document.createElement('div');
-  const inputText = document.createElement('input');
+  const inputText = document.createElement('textarea');
   const postingButton = document.createElement('button');
   const userPostPicture = document.createElement('img');
 
   const feed = document.createElement('div');
+  // const userPost = document.createElement('div');
 
   const userNameContainer = document.createElement('div');
   const userName = document.createElement('h4');
@@ -41,6 +45,7 @@ export const timeLine = () => {
   postingButton.classList.add('postButton');
 
   feed.classList.add('feedContainer');
+  //userPost.classList.add('userPost');
   userNameContainer.classList.add('userNameContainer');
   userName.classList.add('userName');
   userPicture.classList.add('userPicture');
@@ -69,11 +74,11 @@ export const timeLine = () => {
   menuBarImages_2.classList.add('menuBarImages');
   menuBarImages_3.classList.add('menuBarImages');
 
-  inputText.type = 'text';
+  // inputText.type = 'text';
   postingButton.textContent = 'publicar';
   userPicture.src = './images/usuario.png';
   userPostPicture.src = './images/usuario.png';
-  userName.textContent = 'Adahi Gallardo';
+  //userName.textContent = 'Adahi Gallardo';
   iconsImages_1.src = './images/bin.png';
   iconsImages_2.src = './images/editar.png';
   iconsImages_3.src = './images/heart.png';
@@ -86,21 +91,58 @@ export const timeLine = () => {
   inputWrapper.append(inputText, postingButton);
   postUserContainer.append(userPostPicture, inputWrapper);
   userNameContainer.append(userPicture, userName);
-  feed.append(
+  iconsContainer.append(iconsImages_1, iconsImages_2, iconsImages_3);
+  //feed.append(userPost);
+  /* userPost.append(
     postUserContainer,
     userNameContainer,
     contentPostContainer,
-
     iconsContainer
-  );
-  iconsContainer.append(iconsImages_1, iconsImages_2, iconsImages_3);
-
+  );*/
   navBarItems_1.append(menuBarImages_1, navBarText_1);
   navBarItems_2.append(menuBarImages_2, navBarText_2);
   navBarItems_3.append(menuBarImages_3, navBarText_3);
   menuBarIconsContainer.append(navBarItems_1, navBarItems_2, navBarItems_3);
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
+
+  postingButton.addEventListener('click', () => {
+    const userPost = inputText.value;
+    const user = auth.currentUser;
+    const userEmail = user.email;
+    savePost(userEmail, userPost);
+  });
+
+  window.addEventListener('DOMContentLoaded', async (e) => {
+    // querySnapShop traer datos que existen en el momento
+    const posts = await getPosts();
+    console.log(posts);
+    posts.forEach((doc) => {
+      const post = doc.data();
+      console.log(doc.data());
+      feed.innerHTML += `
+      <div class="userPost">
+      <div class = "userNameContainer">
+      <img class="userPicture" src="./images/usuario.png">
+      <h4 class="userName">${post.userEmail}</h4>
+       </div>
+      <div class = "contentPostContainer">
+      <p>${post.userPost}</p>
+      </div>
+      <div class=iconsContainer> 
+      <img class="iconImages" src="./images/bin.png">
+      <img class="iconImages" src="./images/editar.png">
+      <img class="iconImages" src="./images/heart.png">
+      <div>
+    <div> `;
+    });
+  });
+  //onGetTasks((querySnapshot) => {
+  //feed.innerHTML = "";
+
+  /*querySnapshot.forEach((doc) => {
+      const task = doc.data();
+}*/
 
   return timeLineMainContainer;
 };
