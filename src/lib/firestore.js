@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import {
-  getFirestore, collection, addDoc, getDocs, onSnapshot
+  getFirestore, collection, addDoc, getDocs, onSnapshot,
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 import { app } from './config.js';
 
