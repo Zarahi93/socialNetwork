@@ -1,5 +1,10 @@
-import { savePost, onGetPosts } from '../lib/firestore.js';
-import { auth } from '../lib/auth.js';
+import { getPosts } from '../lib/firestore.js';
+import {
+  fireBaseToJSObj,
+  renderPosts,
+  disableButton,
+  createPost,
+} from '../utils.js';
 
 // Creating elements
 export const timeLine = () => {
@@ -10,7 +15,9 @@ export const timeLine = () => {
   const postUserContainer = document.createElement('article');
   const inputWrapper = document.createElement('div');
   const inputText = document.createElement('textarea');
+  inputText.setAttribute('minlength', '1');
   const postingButton = document.createElement('button');
+  postingButton.setAttribute('disabled', '');
   const userPostPicture = document.createElement('img');
 
   const feed = document.createElement('div');
@@ -36,7 +43,6 @@ export const timeLine = () => {
   const menuBarIconsContainer = document.createElement('div');
 
   /* adding classes */
-  /* dentro de maintimeline debe estar */
   timeLineMainContainer.classList.add('timeLineMainContainer');
   timeLineContainer.classList.add('mainTimeline-Container');
   postUserContainer.classList.add('createPostTLContainer');
@@ -77,7 +83,7 @@ export const timeLine = () => {
   iconsImagesEdit.classList.add('iconImages');
   iconsImagesEdit.setAttribute('id', 'edit-btn');
 
-  iconsImagesLike.classList.add('iconImages');
+  iconsImagesLike.classList.add('iconImages', 'iconLike');
   iconsImagesLike.setAttribute('id', 'like-btn');
 
   /* navBar icons */
@@ -103,90 +109,35 @@ export const timeLine = () => {
   postUserContainer.append(userPostPicture, inputWrapper);
   userNameContainer.append(userPicture, userName);
   iconsContainer.append(iconImagesDelete, iconsImagesEdit, iconsImagesLike);
-  // feed.append(userPost);
-  /* userPost.append(
-    postUserContainer,
-    userNameContainer,
-    contentPostContainer,
-    iconsContainer
-  ); */
+
   findHomeContainer.append(findHome, findHomeText);
   adoptContainer.append(adopt, adoptText);
   userProfileContainer.append(userProfile, userProfileText);
-  menuBarIconsContainer.append(findHomeContainer, adoptContainer, userProfileContainer);
+  menuBarIconsContainer.append(
+    findHomeContainer,
+    adoptContainer,
+    userProfileContainer
+  );
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
+  //Funcionalidad de desabilitar boton cuando no hay texto en el input
+  inputText.addEventListener('input', () => {
+    disableButton(inputText, postingButton);
+  });
+
+  //Funcionalidad para guardar un nuevo post
   postingButton.addEventListener('click', () => {
-    const userPost = inputText.value;
-    const user = auth.currentUser;
-    const userEmail = user.email;
-    savePost(userEmail, userPost);
-    inputText.value = '';
+    createPost(feed, inputText);
   });
 
+  //Funcionalidad para obtener y renderizar posts cuando carga la pagina
   window.addEventListener('DOMContentLoaded', async () => {
-    // querySnapShop traer datos que existen en el momento
-    onGetPosts((posts) => {
-      posts.forEach((doc) => {
-        const post = doc.data();
-        // console.log(doc.data());
-        feed.innerHTML += `
-        <div class="userPost">
-        <div class = "userNameContainer">
-        <img class="userPicture" src="./images/usuario.png">
-        <h4 class="userName">${post.userEmail}</h4>
-         </div>
-        <div class = "contentPostContainer">
-        <p>${post.userPost}</p>
-        </div>
-        <div class=iconsContainer> 
-        <img class="iconImages" src="./images/bin.png">
-        <img class="iconImages" src="./images/editar.png">
-        <img class="iconImages" src="./images/heart.png">
-        <div>
-      <div> `;
-      });
-    });
+    //extrae objeto docs que son todos los posts
+    const { docs } = await getPosts();
+    const posts = fireBaseToJSObj(docs);
+    renderPosts(posts, feed);
   });
-
-  /* function postButtonDisabled() {
-    postingButton.disabled = inputText.value === '';
-    inputText.addEventListener('input', () => {
-      postButtonDisabled();
-    });
-  }
-  postButtonDisabled(); */
-
-  // const posts = await getPosts();
-  // console.log(posts);
-  /* posts.forEach((doc) => {
-      const post = doc.data();
-      console.log(doc.data());
-      feed.innerHTML += `
-      <div class="userPost">
-      <div class = "userNameContainer">
-      <img class="userPicture" src="./images/usuario.png">
-      <h4 class="userName">${post.userEmail}</h4>
-       </div>
-      <div class = "contentPostContainer">
-      <p>${post.userPost}</p>
-      </div>
-      <div class=iconsContainer>
-      <img class="iconImages" src="./images/bin.png">
-      <img class="iconImages" src="./images/editar.png">
-      <img class="iconImages" src="./images/heart.png">
-      <div>
-    <div> `;
-    });
-  }); */
-
-  // onGetTasks((querySnapshot) => {
-  // feed.innerHTML = "";
-
-  /* querySnapshot.forEach((doc) => {
-      const task = doc.data();
-} */
 
   return timeLineMainContainer;
 };
