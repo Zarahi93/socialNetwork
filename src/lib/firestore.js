@@ -6,6 +6,7 @@ import {
   getDocs,
   onSnapshot,
   doc,
+  getDoc,
   updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 
@@ -26,5 +27,8 @@ export const dataBaseListener = (callback) =>
 export const docRef = (db, posts, id) => {
   doc(db, posts, id); //devuelve una referencia del post
 };
+
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+
 export const updateLike = (docRef, likeproperty) =>
   updateDoc(docRef, likeproperty);

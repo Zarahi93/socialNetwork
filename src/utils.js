@@ -5,8 +5,12 @@ import {
   getPosts,
   db, //data base
   docRef,
+  getPost,
   updateLike,
 } from './lib/firestore.js';
+
+const userEditPost = document.getElementById('input-Wrapper');
+
 //convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
   //console.log(objectsfirebase);
@@ -17,7 +21,6 @@ export const fireBaseToJSObj = (objectsfirebase) => {
     objectJS.id = idObject;
     return objectJS;
   });
-  console.log(objectsToJS);
   return objectsToJS;
 };
 
@@ -41,7 +44,7 @@ export const renderPosts = (posts, feed) => {
           </div>
           <div class=iconsContainer> 
           <img class="iconImages" src="./images/bin.png">
-          <img class="iconImages" src="./images/editar.png">
+          <img class="iconEdit"  id="${post.id}" src="./images/editar.png">
           <div class="likes-container">
           <span class= "counter"> ${post.likes}</span>
           <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
@@ -54,6 +57,17 @@ export const renderPosts = (posts, feed) => {
 
   feed.innerHTML = postsHtml.join('');
 
+  // Seleccionando todos los botones de edit
+  const btnsEdit = document.querySelectorAll('.iconEdit');
+  btnsEdit.forEach((btnEdit) => {
+    btnEdit.addEventListener('click', async (e) => {
+      const doc = await getPost(e.target.id);
+      const post = doc.data();
+      console.log(doc.data());
+      console.log(userEditPost['user-post']);
+      console.log(post.userPost);
+    });
+  });
   // seleccionando todos los botones de like
   const likesButtons = document.querySelectorAll('.iconLike');
   //console.log(likesButtons);

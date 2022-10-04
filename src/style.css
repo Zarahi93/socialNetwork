@@ -289,6 +289,15 @@ body {
     height: 2.2rem;
     width: 2.2rem;
 }
+.iconEdit{
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+.iconEdit:hover{
+    height: 2.2rem;
+    width: 2.2rem;
+}
 .likes-container{
  position: relative;
  display: flex;

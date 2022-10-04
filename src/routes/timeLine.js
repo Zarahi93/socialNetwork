@@ -47,7 +47,9 @@ export const timeLine = () => {
   timeLineContainer.classList.add('mainTimeline-Container');
   postUserContainer.classList.add('createPostTLContainer');
   inputWrapper.classList.add('inputWrapper');
+  inputWrapper.setAttribute('id', 'input-Wrapper');
   inputText.classList.add('inputText');
+  inputText.setAttribute('id','user-post');
   inputText.spellcheck = true;
   postingButton.classList.add('postButton');
   postingButton.setAttribute('id', 'create-post');
