@@ -17,14 +17,33 @@ export const fireBaseToJSObj = (objectsfirebase) => {
     objectJS.id = idObject;
     return objectJS;
   });
-  console.log(objectsToJS);
+  // console.log(objectsToJS);
   return objectsToJS;
 };
 
 // funcion para contar los likes
 const countinglikes = async (e) => {
-  const postReference = docRef(db, 'posts', e.target.id);
-  console.log(postReference);
+  const feed = document.querySelector('.feedContainer');
+
+  await updateLike(
+    e.target.id,
+    //{ likes: 48 },
+    { userPost: 'cambiando un post' }
+  );
+
+  dataBaseListener(
+    /* vuelve a traer los posts y renderiza */
+    async () => {
+      //extrae objeto docs
+      const { docs } = await getPosts();
+      //console.log(await getPosts());
+      //deconstruccion de objetos
+      //const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
+      // transformando data de firebase a js objects
+      const posts = fireBaseToJSObj(docs);
+      renderPosts(posts, feed);
+    }
+  );
 };
 
 //funcion para renderizar posts
@@ -45,9 +64,7 @@ export const renderPosts = (posts, feed) => {
           <div class="likes-container">
           <span class= "counter"> ${post.likes}</span>
           <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
-          
           </div>
-          
           </div>
         </div> `;
   });
@@ -71,6 +88,7 @@ export const disableButton = (inputText, postingButton) => {
 };
 //creando posts funcion
 export const createPost = (feed, inputText) => {
+  console.log(typeof 'userPost');
   const userPost = inputText.value;
   const userObject = auth.currentUser;
   const userEmail = userObject.email;
@@ -92,6 +110,3 @@ export const createPost = (feed, inputText) => {
     }
   );
 };
-
-//Like function
-const likePosts = () => {};

@@ -23,8 +23,15 @@ export const getPosts = () => getDocs(collection(db, 'posts'));
 export const dataBaseListener = (callback) =>
   onSnapshot(collection(db, 'posts'), callback);
 
-export const docRef = (db, posts, id) => {
+export const docRef = async (db, posts, id) => {
   doc(db, posts, id); //devuelve una referencia del post
 };
-export const updateLike = (docRef, likeproperty) =>
-  updateDoc(docRef, likeproperty);
+
+export const updateLike = async (id, object) => {
+  const ref = doc(db, 'posts', id);
+  await updateDoc(ref, object);
+};
+/*const editPost = async (id, object) => {
+  const ref = doc(db, 'posts', id);
+  await updateDoc(ref, object);*/
+// Set the "capital" field of the city 'DC'
