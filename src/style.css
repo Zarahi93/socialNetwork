@@ -277,14 +277,23 @@ body {
     height: auto; 
     width: 80%;
     min-height: 20vh;
+    font-size: 1rem;
     border: 1px solid #000000;
-    /*background-color: aquamarine;*/
 }
+
 .iconImages{
     height: 2rem;
     width: 2rem;
     cursor: pointer;
 }
+.editing-post{
+    height: 2rem;
+    width: 2rem;
+    display: none;
+    position: absolute;
+    left: 12vh;
+}
+
 .iconImages:hover{
     height: 2.2rem;
     width: 2.2rem;

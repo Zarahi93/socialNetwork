@@ -9,8 +9,6 @@ import {
   updateLike,
 } from './lib/firestore.js';
 
-const userEditPost = document.getElementById('input-Wrapper');
-
 //convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
   //console.log(objectsfirebase);
@@ -39,35 +37,62 @@ export const renderPosts = (posts, feed) => {
           <img class="userPicture" src="./images/usuario.png">
           <h4 class="userName">${post.userEmail}</h4>
            </div>
-          <div class = "contentPostContainer">
-          <p>${post.userPost}</p> 
-          </div>
+          <textarea id="text-post" class = "contentPostContainer" readonly>
+          ${post.userPost}
+          </textarea>
           <div class=iconsContainer> 
           <img class="iconImages" src="./images/bin.png">
-          <img class="iconEdit"  id="${post.id}" src="./images/editar.png">
+          <img class="iconEdit" id="${post.id}" src="./images/editar.png">
           <div class="likes-container">
           <span class= "counter"> ${post.likes}</span>
           <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
-          
+          <img class='editing-post' src='./images/check.png'>
           </div>
+    
           
           </div>
         </div> `;
   });
 
   feed.innerHTML = postsHtml.join('');
-
+/** Funcion de editar posts **/
   // Seleccionando todos los botones de edit
+  const userEditPost = document.querySelectorAll('#user-post');
   const btnsEdit = document.querySelectorAll('.iconEdit');
+
+  // Ocultando el boton de guardar post
+  const btnsSave = document.querySelectorAll('.editing-post');
+  console.log(btnsSave);
+  let isShow = false;
+  console.log(isShow);
+ // const btnSave = btnsSave.forEach(btn);
+  function showBtnSave() {
+    if (isShow === false) {
+      btnsSave.style.display = 'block';
+      isShow = true;
+    } else {
+      btnsSave.style.display = 'none';
+      isShow = false;
+    }
+    return isShow;
+  }
+
+  btnsEdit.forEach((btnEdit) => {
+    btnEdit.addEventListener('click', showBtnSave);
+  });
+
+  // Boton Edit
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener('click', async (e) => {
       const doc = await getPost(e.target.id);
       const post = doc.data();
       console.log(doc.data());
-      console.log(userEditPost['user-post']);
-      console.log(post.userPost);
+      userEditPost.value = post.userPost;
+      console.log(userEditPost.value);
     });
   });
+
+/**Fin de funcion de editar**/
   // seleccionando todos los botones de like
   const likesButtons = document.querySelectorAll('.iconLike');
   //console.log(likesButtons);
@@ -83,7 +108,7 @@ export const disableButton = (inputText, postingButton) => {
     postingButton.removeAttribute('disabled');
   } else postingButton.setAttribute('disabled', '');
 };
-//creando posts funcion
+// creando posts funcion
 export const createPost = (feed, inputText) => {
   const userPost = inputText.value;
   const userObject = auth.currentUser;
@@ -91,7 +116,7 @@ export const createPost = (feed, inputText) => {
   const likes = 0;
   savePost(userEmail, userPost, likes);
   inputText.value = '';
-  /*cuando detecta un cambio en la base de datos, renderiza los post de nuevo, llamando dataBaseListener desde FireStore*/
+/*cuando detecta un cambio en la base de datos, renderiza los post de nuevo, llamando dataBaseListener desde FireStore*/
   dataBaseListener(
     /* vuelve a traer los posts y renderiza */
     async () => {
