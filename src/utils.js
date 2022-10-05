@@ -46,11 +46,10 @@ export const renderPosts = (posts, feed) => {
           <div class="likes-container">
           <span class= "counter"> ${post.likes}</span>
           <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
-          <img class='editing-post' src='./images/check.png'>
+          </div>          
           </div>
-    
-          
-          </div>
+          <img class='editing-post' src='./images/check.png'> </section>
+
         </div> `;
   });
 
@@ -62,23 +61,42 @@ export const renderPosts = (posts, feed) => {
 
   // Ocultando el boton de guardar post
   const btnsSave = document.querySelectorAll('.editing-post');
-  console.log(btnsSave);
+  console.log(typeof btnsSave);
+  const arraySave = Object.keys(btnsSave).forEach((key) => {
+    console.log(btnsSave[key]);
+    return [btnsSave[key]];
+  });
+
+console.log(typeof arraySave);
+
   let isShow = false;
   console.log(isShow);
-  // const btnSave = btnsSave.forEach(btn);
+  // Funcion para mostrar y ocultar los btnsSave
   function showBtnSave() {
-    if (isShow === false) {
-      btnsSave.style.display = 'block';
-      isShow = true;
-    } else {
-      btnsSave.style.display = 'none';
-      isShow = false;
+    for (let i = 0; i < (arraySave.length - 1); i++) {
+      console.log(arraySave[i].style);
+      if (isShow === false) {
+        arraySave[i].style.display = 'block';
+        isShow = true;
+      } else {
+        arraySave[i].style.display = 'none';
+        isShow = false;
+      }
     }
     return isShow;
   }
+// Funcion para eliminar la propiedad readonly del textarea.
+  const textAreas = document.querySelectorAll('#text-post');
 
+  function textEdit() {
+    const textsEdit = textAreas.removeAttribute('readonly');
+    console.log(textsEdit);
+  }
+
+// Funcion para ocultar
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener('click', showBtnSave);
+    btnEdit.addEventListener('click', textEdit);
   });
 
   // Boton Edit
