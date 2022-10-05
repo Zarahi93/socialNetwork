@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { doc } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
+// import { doc } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 import { auth } from '../lib/auth.js';
 import {
   savePost, dataBaseListener, getPosts, db, /* data base */ docRef, updateLike, deleteposts,
