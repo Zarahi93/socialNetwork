@@ -4,6 +4,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   onSnapshot,
   doc,
   updateDoc,
@@ -30,6 +31,14 @@ export const docRef = async (db, posts, id) => {
 export const updateLike = async (id, object) => {
   const ref = doc(db, 'posts', id);
   await updateDoc(ref, object);
+};
+
+//Trae solo un post
+export const getPost = async (id) => {
+  const ref = doc(db, 'posts', id);
+  const post = await getDoc(ref);
+
+  return post;
 };
 /*const editPost = async (id, object) => {
   const ref = doc(db, 'posts', id);

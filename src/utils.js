@@ -3,8 +3,7 @@ import {
   savePost,
   dataBaseListener,
   getPosts,
-  db, //data base
-  docRef,
+  getPost,
   updateLike,
 } from './lib/firestore.js';
 //convierte los objetos firebase a objetos js
@@ -25,12 +24,20 @@ export const fireBaseToJSObj = (objectsfirebase) => {
 const countinglikes = async (e) => {
   const feed = document.querySelector('.feedContainer');
 
+  const fireBasePost = await getPost(e.target.id);
+  const post = fireBasePost.data();
+  const { likes } = post;
+  let likesUpdated = likes + 1;
+
   await updateLike(
     e.target.id,
-    //{ likes: 48 },
-    { userPost: 'cambiando un post' }
+    { likes: likesUpdated }
+    //{ userPost: 'cambiando un post' }
   );
 
+  // necesito una funcion que: al dar click aumente +1 al valor que se imprime en el spam...
+  // el valor resultante, lo tengo que guardar en una variable para que.. cuando se aumente cada vez, se gaurde en esa variable
+  //y ese va a ser el valor que va a tomar likes
   dataBaseListener(
     /* vuelve a traer los posts y renderiza */
     async () => {
@@ -54,16 +61,16 @@ export const renderPosts = (posts, feed) => {
           <div class = "userNameContainer">
           <img class="userPicture" src="./images/usuario.png">
           <h4 class="userName">${post.userEmail}</h4>
-           </div>
+           </div>       
           <div class = "contentPostContainer">
           <p>${post.userPost}</p> 
           </div>
           <div class=iconsContainer> 
           <img class="iconImages" src="./images/bin.png">
           <img class="iconImages" src="./images/editar.png">
-          <div class="likes-container">
-          <span class= "counter"> ${post.likes}</span>
-          <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
+          <div class="likes-container" id=${post.id}>
+           <span class= "counter"> ${post.likes}</span>
+           <img class="iconLike"  src="./images/heart.png">
           </div>
           </div>
         </div> `;
@@ -72,8 +79,8 @@ export const renderPosts = (posts, feed) => {
   feed.innerHTML = postsHtml.join('');
 
   // seleccionando todos los botones de like
-  const likesButtons = document.querySelectorAll('.iconLike');
-  //console.log(likesButtons);
+  const likesButtons = document.querySelectorAll('.likes-container');
+
   likesButtons.forEach((likeButton) => {
     likeButton.addEventListener('click', (e) => {
       countinglikes(e);

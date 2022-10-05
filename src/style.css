@@ -11,17 +11,19 @@ body {
 }
 /*Login and register style begins*/
 .main{
+    display: flex;
+    flex-direction: column;
     background-image: url('./images/registro_fondo.jpg');
     background-repeat: no-repeat;
     background-size:cover;
     width: 100vw;
 	height: 100vh;
+    padding: 5rem 0;
+    align-items: center;
 }
 
 .animal-pawnet {
-    position: absolute;
-    left: 28%;
-    top: 8%;
+  
     font-family: 'Jenna Sue', sans-serif;
     font-weight: 250;
     font-size: 13vw;   
@@ -30,11 +32,7 @@ body {
 }
 .section_login_register {
     display: flex;
-    position: absolute;
-    left: 12.38%;
-    right: 12.69%;
-    top: 18%;
-    bottom: 10.32%;
+    
     background: rgba(198, 207, 255, 0.5);
     border-radius: 18px;
     flex-flow: column wrap;
@@ -167,14 +165,12 @@ body {
   /*Differences between register and login page style ends*/
 
 /*TIMELINE STYLES BEGIN*/
-
-
 .timeLineMainContainer{
     background-color: #F3F8FF;
+    min-height: 600vh;
     min-width: 100vh;
     width: 100vw;
     display: flex;
-    align-items: center;
     justify-content: center;
     position: relative;
 }
@@ -190,7 +186,6 @@ body {
     height: 100vh;
     width: 80%;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
 }
@@ -249,7 +244,8 @@ body {
 }
 .userPost{
    /* background-color: #790252;*/
-    height: 60vh;
+   font-size: 1.5rem;
+    height: 40vh;
     width: 100%;
 }
 .userNameContainer{
@@ -258,7 +254,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1rem;
+    font-size: 2rem;
 }
 .userPicture{
     height: 3rem;
@@ -289,13 +285,25 @@ body {
     height: 2.2rem;
     width: 2.2rem;
 }
+.iconLike{
+    width: 100%;
+    pointer-events: none;
+}
+
 .likes-container{
  position: relative;
  display: flex;
  justify-content: center;
  align-items: center;
-    
+ cursor: pointer;
+ height: 2rem;
+ width: 2rem;
 }
+.likes-container:hover{
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
 
 .counter{
     position: absolute;
@@ -328,5 +336,5 @@ body {
     width: 2rem;
 }
 span{
-    cursor: pointer;
+    pointer-events: none;
 }
