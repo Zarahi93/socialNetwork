@@ -65,7 +65,7 @@ export const renderPosts = (posts, feed) => {
   console.log(btnsSave);
   let isShow = false;
   console.log(isShow);
- // const btnSave = btnsSave.forEach(btn);
+  // const btnSave = btnsSave.forEach(btn);
   function showBtnSave() {
     if (isShow === false) {
       btnsSave.style.display = 'block';
