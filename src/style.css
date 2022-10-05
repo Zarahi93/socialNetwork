@@ -327,3 +327,10 @@ body {
     height: 2rem;
     width: 2rem;
 }
+.delete-btns {
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+
+

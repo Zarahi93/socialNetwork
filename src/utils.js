@@ -1,36 +1,33 @@
+/* eslint-disable no-param-reassign */
+import { doc } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 import { auth } from '../lib/auth.js';
 import {
-  savePost,
-  dataBaseListener,
-  getPosts,
-  db, //data base
-  docRef,
-  updateLike,
+  savePost, dataBaseListener, getPosts, db, /* data base */ docRef, updateLike, deleteposts,
 } from './lib/firestore.js';
-//convierte los objetos firebase a objetos js
+// convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
-  //console.log(objectsfirebase);
+  // console.log(objectsfirebase);
   const objectsToJS = objectsfirebase.map((object) => {
-    const idObject = object.id; //primero sacando el id, antes de tranformarse a JS
+    const idObject = object.id; // primero sacando el id, antes de tranformarse a JS
     const objectJS = object.data();
-    //agregando propiedad id
+    // agregando propiedad id
     objectJS.id = idObject;
     return objectJS;
   });
-  console.log(objectsToJS);
+  // console.log(objectsToJS);
   return objectsToJS;
 };
 
 // funcion para contar los likes
 const countinglikes = async (e) => {
+  // eslint-disable-next-line no-unused-vars
   const postReference = docRef(db, 'posts', e.target.id);
-  console.log(postReference);
+  // console.log(postReference);
 };
 
-//funcion para renderizar posts
+// funcion para renderizar posts
 export const renderPosts = (posts, feed) => {
-  const postsHtml = posts.map((post) => {
-    return ` 
+  const postsHtml = posts.map((post) => ` 
           <div class="userPost">
           <div class = "userNameContainer">
           <img class="userPicture" src="./images/usuario.png">
@@ -40,7 +37,7 @@ export const renderPosts = (posts, feed) => {
           <p>${post.userPost}</p> 
           </div>
           <div class=iconsContainer> 
-          <img class="iconImages" src="./images/bin.png">
+          <img class="delete-btns" data-id="${post.id}" src="./images/bin.png">
           <img class="iconImages" src="./images/editar.png">
           <div class="likes-container">
           <span class= "counter"> ${post.likes}</span>
@@ -49,14 +46,24 @@ export const renderPosts = (posts, feed) => {
           </div>
           
           </div>
-        </div> `;
-  });
+        </div> `);
 
   feed.innerHTML = postsHtml.join('');
 
+  // seleccionando botones para eliminar posts
+
+  const deleteBtns = feed.querySelectorAll('.delete-btns');
+
+  deleteBtns.forEach((btnDelete) => {
+    btnDelete.addEventListener('click', ({ target: { dataset } }) => {
+      // se hace econsulta con la base de datos
+      deleteposts(dataset.id);
+    });
+  });
+
   // seleccionando todos los botones de like
   const likesButtons = document.querySelectorAll('.iconLike');
-  //console.log(likesButtons);
+  // console.log(likesButtons);
   likesButtons.forEach((likeButton) => {
     likeButton.addEventListener('click', (e) => {
       countinglikes(e);
@@ -69,7 +76,7 @@ export const disableButton = (inputText, postingButton) => {
     postingButton.removeAttribute('disabled');
   } else postingButton.setAttribute('disabled', '');
 };
-//creando posts funcion
+// creando posts funcion
 export const createPost = (feed, inputText) => {
   const userPost = inputText.value;
   const userObject = auth.currentUser;
@@ -77,21 +84,22 @@ export const createPost = (feed, inputText) => {
   const likes = 0;
   savePost(userEmail, userPost, likes);
   inputText.value = '';
-  /*cuando detecta un cambio en la base de datos, renderiza los post de nuevo, llamando dataBaseListener desde FireStore*/
+  /* cuando detecta un cambio en la base de datos, renderiza los post de nuevo,
+   llamando dataBaseListener desde FireStore */
   dataBaseListener(
     /* vuelve a traer los posts y renderiza */
     async () => {
-      //extrae objeto docs
+      // extrae objeto docs
       const { docs } = await getPosts();
-      //console.log(await getPosts());
-      //deconstruccion de objetos
-      //const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
+      // console.log(await getPosts());
+      // deconstruccion de objetos
+      // const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
       // transformando data de firebase a js objects
       const posts = fireBaseToJSObj(docs);
       renderPosts(posts, feed);
-    }
+    },
   );
 };
 
-//Like function
-const likePosts = () => {};
+// Like function
+// const likePosts = () => {};

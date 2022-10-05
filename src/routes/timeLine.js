@@ -79,6 +79,7 @@ export const timeLine = () => {
 
   iconImagesDelete.classList.add('iconImages');
   iconImagesDelete.setAttribute('id', 'delete-btn');
+  iconImagesDelete.setAttribute('class', 'delete-btns');
 
   iconsImagesEdit.classList.add('iconImages');
   iconsImagesEdit.setAttribute('id', 'edit-btn');
@@ -116,24 +117,24 @@ export const timeLine = () => {
   menuBarIconsContainer.append(
     findHomeContainer,
     adoptContainer,
-    userProfileContainer
+    userProfileContainer,
   );
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
-  //Funcionalidad de desabilitar boton cuando no hay texto en el input
+  // Funcionalidad de desabilitar boton cuando no hay texto en el input
   inputText.addEventListener('input', () => {
     disableButton(inputText, postingButton);
   });
 
-  //Funcionalidad para guardar un nuevo post
+  // Funcionalidad para guardar un nuevo post
   postingButton.addEventListener('click', () => {
     createPost(feed, inputText);
   });
 
-  //Funcionalidad para obtener y renderizar posts cuando carga la pagina
+  // Funcionalidad para obtener y renderizar posts cuando carga la pagina
   window.addEventListener('DOMContentLoaded', async () => {
-    //extrae objeto docs que son todos los posts
+    // extrae objeto docs que son todos los posts
     const { docs } = await getPosts();
     const posts = fireBaseToJSObj(docs);
     renderPosts(posts, feed);
