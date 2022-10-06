@@ -1,4 +1,4 @@
-import { getPosts } from '../lib/firestore.js';
+import { getPosts, dataBaseListener } from '../lib/firestore.js';
 import {
   fireBaseToJSObj,
   renderPosts,
@@ -47,7 +47,9 @@ export const timeLine = () => {
   timeLineContainer.classList.add('mainTimeline-Container');
   postUserContainer.classList.add('createPostTLContainer');
   inputWrapper.classList.add('inputWrapper');
+  inputWrapper.setAttribute('id', 'input-Wrapper');
   inputText.classList.add('inputText');
+  inputText.setAttribute('id', 'user-post');
   inputText.spellcheck = true;
   postingButton.classList.add('postButton');
   postingButton.setAttribute('id', 'create-post');
@@ -118,6 +120,7 @@ export const timeLine = () => {
     adoptContainer,
     userProfileContainer
   );
+  feed.append();
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
@@ -128,7 +131,7 @@ export const timeLine = () => {
 
   //Funcionalidad para guardar un nuevo post
   postingButton.addEventListener('click', () => {
-    createPost(feed, inputText);
+    createPost(inputText, postingButton);
   });
 
   //Funcionalidad para obtener y renderizar posts cuando carga la pagina
@@ -138,6 +141,20 @@ export const timeLine = () => {
     const posts = fireBaseToJSObj(docs);
     renderPosts(posts, feed);
   });
+
+  dataBaseListener(
+    /* vuelve a traer los posts y renderiza */
+    async () => {
+      //extrae objeto docs
+      const { docs } = await getPosts();
+      //console.log(await getPosts());
+      //deconstruccion de objetos
+      //const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
+      // transformando data de firebase a js objects
+      const posts = fireBaseToJSObj(docs);
+      renderPosts(posts, feed);
+    }
+  );
 
   return timeLineMainContainer;
 };

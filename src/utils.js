@@ -5,6 +5,7 @@ import {
   getPosts,
   getPost,
   updateLike,
+  deleteposts,
 } from './lib/firestore.js';
 //convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
@@ -38,19 +39,6 @@ const countinglikes = async (e) => {
   // necesito una funcion que: al dar click aumente +1 al valor que se imprime en el spam...
   // el valor resultante, lo tengo que guardar en una variable para que.. cuando se aumente cada vez, se gaurde en esa variable
   //y ese va a ser el valor que va a tomar likes
-  dataBaseListener(
-    /* vuelve a traer los posts y renderiza */
-    async () => {
-      //extrae objeto docs
-      const { docs } = await getPosts();
-      //console.log(await getPosts());
-      //deconstruccion de objetos
-      //const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
-      // transformando data de firebase a js objects
-      const posts = fireBaseToJSObj(docs);
-      renderPosts(posts, feed);
-    }
-  );
 };
 
 //funcion para renderizar posts
@@ -66,7 +54,7 @@ export const renderPosts = (posts, feed) => {
           <p>${post.userPost}</p> 
           </div>
           <div class=iconsContainer> 
-          <img class="iconImages" src="./images/bin.png">
+          <img class="delete-btns" data-id="${post.id}" src="./images/bin.png">
           <img class="iconImages" src="./images/editar.png">
           <div class="likes-container" id=${post.id}>
            <span class= "counter"> ${post.likes}</span>
@@ -76,7 +64,17 @@ export const renderPosts = (posts, feed) => {
         </div> `;
   });
 
-  feed.innerHTML = postsHtml.join('');
+  feed.innerHTML = `${postsHtml.join('')}<div class='divider'></div>`;
+  // seleccionando botones para eliminar posts
+
+  const deleteBtns = feed.querySelectorAll('.delete-btns');
+
+  deleteBtns.forEach((btnDelete) => {
+    btnDelete.addEventListener('click', ({ target: { dataset } }) => {
+      // se hace econsulta con la base de datos
+      deleteposts(dataset.id);
+    });
+  });
 
   // seleccionando todos los botones de like
   const likesButtons = document.querySelectorAll('.likes-container');
@@ -94,7 +92,7 @@ export const disableButton = (inputText, postingButton) => {
   } else postingButton.setAttribute('disabled', '');
 };
 //creando posts funcion
-export const createPost = (feed, inputText) => {
+export const createPost = (inputText, postingButton) => {
   console.log(typeof 'userPost');
   const userPost = inputText.value;
   const userObject = auth.currentUser;
@@ -102,18 +100,6 @@ export const createPost = (feed, inputText) => {
   const likes = 0;
   savePost(userEmail, userPost, likes);
   inputText.value = '';
+  disableButton(inputText, postingButton);
   /*cuando detecta un cambio en la base de datos, renderiza los post de nuevo, llamando dataBaseListener desde FireStore*/
-  dataBaseListener(
-    /* vuelve a traer los posts y renderiza */
-    async () => {
-      //extrae objeto docs
-      const { docs } = await getPosts();
-      //console.log(await getPosts());
-      //deconstruccion de objetos
-      //const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
-      // transformando data de firebase a js objects
-      const posts = fireBaseToJSObj(docs);
-      renderPosts(posts, feed);
-    }
-  );
 };

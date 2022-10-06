@@ -8,6 +8,7 @@ import {
   onSnapshot,
   doc,
   updateDoc,
+  deleteDoc,
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 
 import { app } from './config.js';
@@ -27,6 +28,7 @@ export const dataBaseListener = (callback) =>
 export const docRef = async (db, posts, id) => {
   doc(db, posts, id); //devuelve una referencia del post
 };
+export const deleteposts = (id) => deleteDoc(doc(db, 'posts', id));
 
 export const updateLike = async (id, object) => {
   const ref = doc(db, 'posts', id);
