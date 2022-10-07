@@ -11,17 +11,19 @@ body {
 }
 /*Login and register style begins*/
 .main{
+    display: flex;
+    flex-direction: column;
     background-image: url('./images/registro_fondo.jpg');
     background-repeat: no-repeat;
     background-size:cover;
     width: 100vw;
 	height: 100vh;
+    padding: 5rem 0;
+    align-items: center;
 }
 
 .animal-pawnet {
-    position: absolute;
-    left: 28%;
-    top: 8%;
+  
     font-family: 'Jenna Sue', sans-serif;
     font-weight: 250;
     font-size: 13vw;   
@@ -30,11 +32,7 @@ body {
 }
 .section_login_register {
     display: flex;
-    position: absolute;
-    left: 12.38%;
-    right: 12.69%;
-    top: 18%;
-    bottom: 10.32%;
+    
     background: rgba(198, 207, 255, 0.5);
     border-radius: 18px;
     flex-flow: column wrap;
@@ -167,14 +165,10 @@ body {
   /*Differences between register and login page style ends*/
 
 /*TIMELINE STYLES BEGIN*/
-
-
 .timeLineMainContainer{
-    background-color: #F3F8FF;
-    min-width: 100vh;
+    min-width: 100vw;
     width: 100vw;
     display: flex;
-    align-items: center;
     justify-content: center;
     position: relative;
 }
@@ -190,9 +184,8 @@ body {
     height: 100vh;
     width: 80%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    padding: 2rem 0;
 }
 .createPostTLContainer{
     height: auto;
@@ -238,7 +231,6 @@ body {
     border-radius: .5rem;
 }
 .feedContainer{
-    height: 60vh;
     width: 100%;
     /*background-color: coral;*/
     /*display: flex;
@@ -247,9 +239,16 @@ body {
     align-items: center;
     font-size: 1rem;*/
 }
+.divider{
+    height: 5vh;
+}
 .userPost{
    /* background-color: #790252;*/
-    height: 60vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-size: 1.5rem;
+    height: 40vh;
     width: 100%;
 }
 .userNameContainer{
@@ -258,7 +257,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1rem;
+    font-size: 2rem;
 }
 .userPicture{
     height: 3rem;
@@ -279,6 +278,11 @@ body {
     min-height: 20vh;
     font-size: 1rem;
     border: 1px solid #000000;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-color: aquamarine;*/
 }
 
 .iconImages{
@@ -298,6 +302,7 @@ body {
     height: 2.2rem;
     width: 2.2rem;
 }
+
 .iconEdit{
     height: 2rem;
     width: 2rem;
@@ -307,17 +312,29 @@ body {
     height: 2.2rem;
     width: 2.2rem;
 }
+
+.iconLike{
+    width: 100%;
+    pointer-events: none;
+}
+
 .likes-container{
  position: relative;
  display: flex;
  justify-content: center;
  align-items: center;
-    
+ cursor: pointer;
+ height: 2rem;
+ width: 2rem;
+}
+.likes-container:hover{
+    height: 2.2rem;
+    width: 2.2rem;
 }
 
 .counter{
     position: absolute;
-    z-index: 9;
+    z-index: 3;
     font-size: .7em;
 }
 .navBar {
@@ -325,12 +342,14 @@ body {
     height: 10vh;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     background-color: #FFFFFF;
     position: fixed;
     bottom: 0;
     left: 0;
     /* border: 1rem solid green; */
     padding: 0.3rem;
+    z-index: 4;
 }
 
 .navBarText{
@@ -344,4 +363,20 @@ body {
 .menuBarImages{
     height: 2rem;
     width: 2rem;
+}
+span{
+    pointer-events: none;
+}
+.delete-btns {
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 760px){
+   
+    .mainTimeline-Container{
+        width: 100vw;
+    }
+    
 }

@@ -1,4 +1,4 @@
-import { getPosts, updatePost } from '../lib/firestore.js';
+import { getPosts, updatePost, dataBaseListener } from '../lib/firestore.js';
 import {
   fireBaseToJSObj,
   renderPosts,
@@ -123,6 +123,7 @@ export const timeLine = () => {
     adoptContainer,
     userProfileContainer,
   );
+  feed.append();
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
@@ -148,6 +149,20 @@ export const timeLine = () => {
     const posts = fireBaseToJSObj(docs);
     renderPosts(posts, feed);
   });
+
+  dataBaseListener(
+    /* vuelve a traer los posts y renderiza */
+    async () => {
+      //extrae objeto docs
+      const { docs } = await getPosts();
+      //console.log(await getPosts());
+      //deconstruccion de objetos
+      //const {apellido} = {nombre: 'maria', apellido: 'guzmman'}
+      // transformando data de firebase a js objects
+      const posts = fireBaseToJSObj(docs);
+      renderPosts(posts, feed);
+    }
+  );
 
   return timeLineMainContainer;
 };

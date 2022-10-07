@@ -4,10 +4,12 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   onSnapshot,
   doc,
   getDoc,
   updateDoc,
+  deleteDoc,
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
 
 import { app } from './config.js';
@@ -24,7 +26,7 @@ export const getPosts = () => getDocs(collection(db, 'posts'));
 export const dataBaseListener = (callback) =>
   onSnapshot(collection(db, 'posts'), callback);
 
-export const docRef = (db, posts, id) => {
+export const docRef = async (db, posts, id) => {
   doc(db, posts, id); //devuelve una referencia del post
 };
 
@@ -37,3 +39,19 @@ export const updatePost = (id, newFields) => {
 
 export const updateLike = (docRef, likeproperty) =>
   updateDoc(docRef, likeproperty);
+
+export const deleteposts = (id) => deleteDoc(doc(db, 'posts', id));
+
+export const updateLike = async (id, object) => {
+  const ref = doc(db, 'posts', id);
+  await updateDoc(ref, object);
+};
+
+//Trae solo un post
+export const getPost = async (id) => {
+  const ref = doc(db, 'posts', id);
+  const post = await getDoc(ref);
+
+  return post;
+};
+
