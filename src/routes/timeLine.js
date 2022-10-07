@@ -136,6 +136,7 @@ export const timeLine = () => {
       createPost(feed, inputText);
     } else {
       updatePost(id, { userPost: inputText.value });
+      editStatus = false;
     }
   });
 
