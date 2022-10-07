@@ -7,6 +7,7 @@ import {
   getDoc,
   onSnapshot,
   doc,
+  getDoc,
   updateDoc,
   deleteDoc,
 } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js';
@@ -28,6 +29,17 @@ export const dataBaseListener = (callback) =>
 export const docRef = async (db, posts, id) => {
   doc(db, posts, id); //devuelve una referencia del post
 };
+
+export const getPost = (id) => getDoc(doc(db, 'posts', id));// Pra poder obtener un post en especifico
+
+export const updatePost = (id, newFields) => { 
+  console.log(id);
+  console.log(newFields);
+  updateDoc(doc(db, 'posts', id), newFields)};
+
+export const updateLike = (docRef, likeproperty) =>
+  updateDoc(docRef, likeproperty);
+
 export const deleteposts = (id) => deleteDoc(doc(db, 'posts', id));
 
 export const updateLike = async (id, object) => {
@@ -42,7 +54,4 @@ export const getPost = async (id) => {
 
   return post;
 };
-/*const editPost = async (id, object) => {
-  const ref = doc(db, 'posts', id);
-  await updateDoc(ref, object);*/
-// Set the "capital" field of the city 'DC'
+

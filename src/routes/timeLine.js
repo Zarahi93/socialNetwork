@@ -1,9 +1,12 @@
-import { getPosts, dataBaseListener } from '../lib/firestore.js';
+import { getPosts, updatePost, dataBaseListener } from '../lib/firestore.js';
 import {
   fireBaseToJSObj,
   renderPosts,
   disableButton,
   createPost,
+  getEditStatus,
+  setEditStatus,
+  id,
 } from '../utils.js';
 
 // Creating elements
@@ -118,25 +121,30 @@ export const timeLine = () => {
   menuBarIconsContainer.append(
     findHomeContainer,
     adoptContainer,
-    userProfileContainer
+    userProfileContainer,
   );
   feed.append();
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
   timeLineMainContainer.append(timeLineContainer);
 
-  //Funcionalidad de desabilitar boton cuando no hay texto en el input
+  // Funcionalidad de desabilitar boton cuando no hay texto en el input
   inputText.addEventListener('input', () => {
     disableButton(inputText, postingButton);
   });
 
-  //Funcionalidad para guardar un nuevo post
+  // Funcionalidad para guardar un nuevo post
   postingButton.addEventListener('click', () => {
-    createPost(inputText, postingButton);
+    if (getEditStatus() !== true) {
+      createPost(feed, inputText);
+    } else {
+      updatePost(id, { userPost: inputText.value });
+      setEditStatus(false);
+    }
   });
 
-  //Funcionalidad para obtener y renderizar posts cuando carga la pagina
+  // Funcionalidad para obtener y renderizar posts cuando carga la pagina
   window.addEventListener('DOMContentLoaded', async () => {
-    //extrae objeto docs que son todos los posts
+    // extrae objeto docs que son todos los posts
     const { docs } = await getPosts();
     const posts = fireBaseToJSObj(docs);
     renderPosts(posts, feed);

@@ -276,6 +276,7 @@ body {
     height: auto; 
     width: 80%;
     min-height: 20vh;
+    font-size: 1rem;
     border: 1px solid #000000;
     border-radius: 1rem;
     display: flex;
@@ -283,15 +284,35 @@ body {
     align-items: center;
     /*background-color: aquamarine;*/
 }
+
 .iconImages{
     height: 2rem;
     width: 2rem;
     cursor: pointer;
 }
+.saving-post{
+    height: 2rem;
+    width: 2rem;
+    display: none;
+    position: absolute;
+    left: 67vh;
+}
+
 .iconImages:hover{
     height: 2.2rem;
     width: 2.2rem;
 }
+
+.iconEdit{
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+.iconEdit:hover{
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
 .iconLike{
     width: 100%;
     pointer-events: none;
@@ -310,7 +331,6 @@ body {
     height: 2.2rem;
     width: 2.2rem;
 }
-
 
 .counter{
     position: absolute;

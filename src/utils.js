@@ -3,10 +3,20 @@ import {
   savePost,
   dataBaseListener,
   getPosts,
+  db, //data base
+  docRef,
   getPost,
   updateLike,
   deleteposts,
 } from './lib/firestore.js';
+let editStatus = false;
+export const setEditStatus = (newStatus) => {
+  editStatus = newStatus;
+};
+export const getEditStatus = () => {
+  return editStatus;
+};
+export let id = '';
 //convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
   //console.log(objectsfirebase);
@@ -17,7 +27,6 @@ export const fireBaseToJSObj = (objectsfirebase) => {
     objectJS.id = idObject;
     return objectJS;
   });
-  // console.log(objectsToJS);
   return objectsToJS;
 };
 
@@ -55,15 +64,35 @@ export const renderPosts = (posts, feed) => {
           </div>
           <div class=iconsContainer> 
           <img class="delete-btns" data-id="${post.id}" src="./images/bin.png">
-          <img class="iconImages" src="./images/editar.png">
+          <img class="iconEdit" data-id="${post.id}" src="./images/editar.png">
           <div class="likes-container" id=${post.id}>
            <span class= "counter"> ${post.likes}</span>
            <img class="iconLike"  src="./images/heart.png">
           </div>
           </div>
+          <img data-id="${post.id}" class='saving-post' src='./images/check.png'>
         </div> `;
   });
-
+  feed.innerHTML = postsHtml.join('');
+  // /** Funcion de editar posts **/
+  // // Seleccionando todos los botones de edit
+  const userEditPost = document.getElementById('user-post');
+  console.log(userEditPost);
+  const btnsEdit = document.querySelectorAll('.iconEdit');
+  const btnSave = document.getElementById('create-post');
+  // Boton Edit
+  btnsEdit.forEach((btnEdit) => {
+    btnEdit.addEventListener('click', async (e) => {
+      const doc = await getPost(e.target.dataset.id);
+      const post = doc.data();
+      userEditPost.value = post.userPost;
+      editStatus = true;
+      id = e.target.dataset.id;
+      btnSave.innerHTML = 'Guardar';
+      console.log(editStatus);
+    });
+  });
+ 
   feed.innerHTML = `${postsHtml.join('')}<div class='divider'></div>`;
   // seleccionando botones para eliminar posts
 
@@ -75,7 +104,6 @@ export const renderPosts = (posts, feed) => {
       deleteposts(dataset.id);
     });
   });
-
   // seleccionando todos los botones de like
   const likesButtons = document.querySelectorAll('.likes-container');
 
