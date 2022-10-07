@@ -286,7 +286,7 @@ body {
     width: 2rem;
     cursor: pointer;
 }
-.editing-post{
+.saving-post{
     height: 2rem;
     width: 2rem;
     display: none;

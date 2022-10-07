@@ -37,65 +37,76 @@ export const renderPosts = (posts, feed) => {
           <img class="userPicture" src="./images/usuario.png">
           <h4 class="userName">${post.userEmail}</h4>
            </div>
-          <textarea id="text-post" class = "contentPostContainer" readonly>
+          <textarea id="text-post" class ="contentPostContainer" readonly>
           ${post.userPost}
           </textarea>
           <div class=iconsContainer> 
           <img class="iconImages" src="./images/bin.png">
           <img class="iconEdit" id="${post.id}" src="./images/editar.png">
           <div class="likes-container">
-          <span class= "counter"> ${post.likes}</span>
+          <span class="counter"> ${post.likes}</span>
           <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
           </div>          
           </div>
-          <img class='editing-post' src='./images/check.png'> </section>
+          <img id="${post.id}" class='saving-post' src='./images/check.png'>
 
         </div> `;
   });
 
   feed.innerHTML = postsHtml.join('');
-/** Funcion de editar posts **/
+  /** Funcion de editar posts **/
   // Seleccionando todos los botones de edit
   const userEditPost = document.querySelectorAll('#user-post');
-  const btnsEdit = document.querySelectorAll('.iconEdit');
-
+  console.log(userEditPost);
+  //const btnsEdit = document.querySelectorAll('.iconEdit');
+  const btnsEdit = feed.querySelectorAll('#${post.id}');
   // Ocultando el boton de guardar post
-  const btnsSave = document.querySelectorAll('.editing-post');
+  const btnsSave = feed.querySelectorAll('.saving-post');
+  console.log(btnsSave);
   console.log(typeof btnsSave);
-  const arraySave = Object.keys(btnsSave).forEach((key) => {
-    console.log(btnsSave[key]);
-    return [btnsSave[key]];
-  });
-
-console.log(typeof arraySave);
-
   let isShow = false;
   console.log(isShow);
-  // Funcion para mostrar y ocultar los btnsSave
-  function showBtnSave() {
-    for (let i = 0; i < (arraySave.length - 1); i++) {
-      console.log(arraySave[i].style);
-      if (isShow === false) {
-        arraySave[i].style.display = 'block';
-        isShow = true;
-      } else {
-        arraySave[i].style.display = 'none';
-        isShow = false;
+  // Ocultar el contenedor de los iconos
+  const btnContainer = feed.querySelectorAll('.iconsContainer');
+  let isHiden = false;
+  // Funcion para ocultar los iconos
+  
+  function hideIcons() {
+    for (let i = 0; i < (btnContainer.length - 1); i++) {
+      if (isHiden === false) {
+        btnContainer[i].style.display = 'none';
+        isHiden = true;
       }
     }
+    console.log(isHiden);
+    return isHiden;
+  }
+  // Funcion para mostrar los btnsSave
+  function showBtnSave() {
+    for (let i = 0; i < (btnsSave.length - 1); i++) {
+      if (isShow === false) {
+        btnsSave[i].style.display = 'block';
+        isShow = true;
+      }
+    }
+    console.log(isShow);
     return isShow;
   }
-// Funcion para eliminar la propiedad readonly del textarea.
-  const textAreas = document.querySelectorAll('#text-post');
-
+  // Funcion para eliminar la propiedad readonly del textarea.
+  const textAreas = feed.querySelectorAll('#text-post');
   function textEdit() {
-    const textsEdit = textAreas.removeAttribute('readonly');
-    console.log(textsEdit);
+    for (let i = 0; i < (textAreas.length - 1); i++) {
+      console.log(textAreas[i]);
+      if (textAreas[i]) {
+        textAreas[i].removeAttribute('readonly');
+      }
+    }
   }
 
-// Funcion para ocultar
+  // Ocultar y mostrar elementos segun lo necesario
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener('click', showBtnSave);
+    btnEdit.addEventListener('click', hideIcons);
     btnEdit.addEventListener('click', textEdit);
   });
 
@@ -110,7 +121,7 @@ console.log(typeof arraySave);
     });
   });
 
-/**Fin de funcion de editar**/
+  /**Fin de funcion de editar**/
   // seleccionando todos los botones de like
   const likesButtons = document.querySelectorAll('.iconLike');
   //console.log(likesButtons);
@@ -134,7 +145,7 @@ export const createPost = (feed, inputText) => {
   const likes = 0;
   savePost(userEmail, userPost, likes);
   inputText.value = '';
-/*cuando detecta un cambio en la base de datos, renderiza los post de nuevo, llamando dataBaseListener desde FireStore*/
+  /*cuando detecta un cambio en la base de datos, renderiza los post de nuevo, llamando dataBaseListener desde FireStore*/
   dataBaseListener(
     /* vuelve a traer los posts y renderiza */
     async () => {
