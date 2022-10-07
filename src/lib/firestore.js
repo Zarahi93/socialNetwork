@@ -28,7 +28,9 @@ export const docRef = (db, posts, id) => {
   doc(db, posts, id); //devuelve una referencia del post
 };
 
-export const getPost = (id) => getDoc(doc(db, 'posts', id));
+export const getPost = (id) => getDoc(doc(db, 'posts', id));// Pra poder obtener un post en especifico
+
+export const updatePost = (id, newFields) => updateDoc(doc(db, 'post', id), newFields);
 
 export const updateLike = (docRef, likeproperty) =>
   updateDoc(docRef, likeproperty);

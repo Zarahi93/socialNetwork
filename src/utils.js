@@ -8,7 +8,8 @@ import {
   getPost,
   updateLike,
 } from './lib/firestore.js';
-
+export let editStatus = false;
+export let id = '';
 //convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
   //console.log(objectsfirebase);
@@ -42,84 +43,83 @@ export const renderPosts = (posts, feed) => {
           </textarea>
           <div class=iconsContainer> 
           <img class="iconImages" src="./images/bin.png">
-          <img class="iconEdit" id="${post.id}" src="./images/editar.png">
+          <img class="iconEdit" data-id="${post.id}" src="./images/editar.png">
           <div class="likes-container">
           <span class="counter"> ${post.likes}</span>
           <img class="iconImages iconLike" id=${post.id} src="./images/heart.png">
           </div>          
           </div>
-          <img id="${post.id}" class='saving-post' src='./images/check.png'>
+          <img data-id="${post.id}" class='saving-post' src='./images/check.png'>
 
         </div> `;
   });
 
   feed.innerHTML = postsHtml.join('');
-  /** Funcion de editar posts **/
-  // Seleccionando todos los botones de edit
-  const userEditPost = document.querySelectorAll('#user-post');
+  // /** Funcion de editar posts **/
+  // // Seleccionando todos los botones de edit
+  const userEditPost = document.getElementById('user-post');
   console.log(userEditPost);
-  //const btnsEdit = document.querySelectorAll('.iconEdit');
-  const btnsEdit = feed.querySelectorAll('#${post.id}');
-  // Ocultando el boton de guardar post
-  const btnsSave = feed.querySelectorAll('.saving-post');
-  console.log(btnsSave);
-  console.log(typeof btnsSave);
-  let isShow = false;
-  console.log(isShow);
-  // Ocultar el contenedor de los iconos
-  const btnContainer = feed.querySelectorAll('.iconsContainer');
-  let isHiden = false;
-  // Funcion para ocultar los iconos
-  
-  function hideIcons() {
-    for (let i = 0; i < (btnContainer.length - 1); i++) {
-      if (isHiden === false) {
-        btnContainer[i].style.display = 'none';
-        isHiden = true;
-      }
-    }
-    console.log(isHiden);
-    return isHiden;
-  }
-  // Funcion para mostrar los btnsSave
-  function showBtnSave() {
-    for (let i = 0; i < (btnsSave.length - 1); i++) {
-      if (isShow === false) {
-        btnsSave[i].style.display = 'block';
-        isShow = true;
-      }
-    }
-    console.log(isShow);
-    return isShow;
-  }
-  // Funcion para eliminar la propiedad readonly del textarea.
-  const textAreas = feed.querySelectorAll('#text-post');
-  function textEdit() {
-    for (let i = 0; i < (textAreas.length - 1); i++) {
-      console.log(textAreas[i]);
-      if (textAreas[i]) {
-        textAreas[i].removeAttribute('readonly');
-      }
-    }
-  }
-
-  // Ocultar y mostrar elementos segun lo necesario
-  btnsEdit.forEach((btnEdit) => {
-    btnEdit.addEventListener('click', showBtnSave);
-    btnEdit.addEventListener('click', hideIcons);
-    btnEdit.addEventListener('click', textEdit);
-  });
-
+  const btnsEdit = document.querySelectorAll('.iconEdit');
+  const btnSave = document.getElementById('create-post');
   // Boton Edit
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener('click', async (e) => {
-      const doc = await getPost(e.target.id);
+      const doc = await getPost(e.target.dataset.id);
       const post = doc.data();
-      console.log(doc.data());
       userEditPost.value = post.userPost;
-      console.log(userEditPost.value);
+      editStatus = true;
+      id = e.target.dataset.id;
+      btnSave.innerHTML = 'Guardar';
+      console.log(editStatus);
     });
   });
+  // const btnsEdit = feed.querySelectorAll('#${post.id}');
+  // // Ocultando el boton de guardar post
+  // const btnsSave = feed.querySelectorAll('.saving-post');
+  // console.log(btnsSave);
+  // console.log(typeof btnsSave);
+  // let isShow = false;
+  // console.log(isShow);
+  // // Ocultar el contenedor de los iconos
+  // const btnContainer = feed.querySelectorAll('.iconsContainer');
+  // let isHiden = false;
+  // // Funcion para ocultar los iconos
+  // function hideIcons() {
+  //   for (let i = 0; i < (btnContainer.length - 1); i++) {
+  //     if (isHiden === false) {
+  //       btnContainer[i].style.display = 'none';
+  //       isHiden = true;
+  //     }
+  //   }
+  //   console.log(isHiden);
+  //   return isHiden;
+  // }
+  // // Funcion para mostrar los btnsSave
+  // function showBtnSave() {
+  //   for (let i = 0; i < (btnsSave.length - 1); i++) {
+  //     if (isShow === false) {
+  //       btnsSave[i].style.display = 'block';
+  //       isShow = true;
+  //     }
+  //   }
+  //   console.log(isShow);
+  //   return isShow;
+  // }
+  // Funcion para eliminar la propiedad readonly del textarea.
+  // const textAreas = feed.querySelectorAll('#text-post');
+  // function textEdit() {
+  //   for (let i = 0; i < (textAreas.length - 1); i++) {
+  //     console.log(textAreas[i]);
+  //     if (textAreas[i]) {
+  //       textAreas[i].removeAttribute('readonly');
+  //     }
+  //   }
+  // }
+
+  // // Ocultar y mostrar elementos segun lo necesario
+  // btnsEdit.forEach((btnEdit) => {
+  //   btnEdit.addEventListener('click', textEdit);
+  // });
 
   /**Fin de funcion de editar**/
   // seleccionando todos los botones de like
