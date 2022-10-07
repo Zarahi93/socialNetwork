@@ -4,7 +4,8 @@ import {
   renderPosts,
   disableButton,
   createPost,
-  editStatus,
+  getEditStatus,
+  setEditStatus,
   id,
 } from '../utils.js';
 
@@ -132,11 +133,11 @@ export const timeLine = () => {
 
   // Funcionalidad para guardar un nuevo post
   postingButton.addEventListener('click', () => {
-    if (editStatus !== true) {
+    if (getEditStatus() !== true) {
       createPost(feed, inputText);
     } else {
       updatePost(id, { userPost: inputText.value });
-      editStatus = false;
+      setEditStatus(false);
     }
   });
 

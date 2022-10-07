@@ -8,7 +8,13 @@ import {
   getPost,
   updateLike,
 } from './lib/firestore.js';
-export let editStatus = false;
+let editStatus = false;
+export const setEditStatus = (newStatus) => {
+  editStatus = newStatus;
+};
+export const getEditStatus = () => {
+  return editStatus;
+};
 export let id = '';
 //convierte los objetos firebase a objetos js
 export const fireBaseToJSObj = (objectsfirebase) => {
