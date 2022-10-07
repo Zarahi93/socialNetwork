@@ -10,6 +10,7 @@ import {
   deleteposts,
 } from './lib/firestore.js';
 let editStatus = false;
+
 export const setEditStatus = (newStatus) => {
   editStatus = newStatus;
 };
@@ -73,9 +74,11 @@ export const renderPosts = (posts, feed) => {
           <img data-id="${post.id}" class='saving-post' src='./images/check.png'>
         </div> `;
   });
-  feed.innerHTML = postsHtml.join('');
-  // /** Funcion de editar posts **/
-  // // Seleccionando todos los botones de edit
+
+  feed.innerHTML = `${postsHtml.join('')}<div class='divider'></div>`;
+
+  // /** Funcion de editar posts **
+
   const userEditPost = document.getElementById('user-post');
   console.log(userEditPost);
   const btnsEdit = document.querySelectorAll('.iconEdit');
@@ -92,8 +95,7 @@ export const renderPosts = (posts, feed) => {
       console.log(editStatus);
     });
   });
- 
-  feed.innerHTML = `${postsHtml.join('')}<div class='divider'></div>`;
+
   // seleccionando botones para eliminar posts
 
   const deleteBtns = feed.querySelectorAll('.delete-btns');
@@ -126,6 +128,7 @@ export const createPost = (inputText, postingButton) => {
   const userObject = auth.currentUser;
   const userEmail = userObject.email;
   const likes = 0;
+  console.log(`${userEmail} ${userPost} ${likes}`);
   savePost(userEmail, userPost, likes);
   inputText.value = '';
   disableButton(inputText, postingButton);

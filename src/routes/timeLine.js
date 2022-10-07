@@ -121,7 +121,7 @@ export const timeLine = () => {
   menuBarIconsContainer.append(
     findHomeContainer,
     adoptContainer,
-    userProfileContainer,
+    userProfileContainer
   );
   feed.append();
   timeLineContainer.append(postUserContainer, feed, menuBarIconsContainer);
@@ -133,9 +133,9 @@ export const timeLine = () => {
   });
 
   // Funcionalidad para guardar un nuevo post
-  postingButton.addEventListener('click', () => {
+  postingButton.addEventListener('click', (e) => {
     if (getEditStatus() !== true) {
-      createPost(feed, inputText);
+      createPost(inputText, e.target);
     } else {
       updatePost(id, { userPost: inputText.value });
       setEditStatus(false);
