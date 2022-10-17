@@ -1,0 +1,382 @@
+@import url('http://fonts.cdnfonts.com/css/jenna-sue');
+* {   /* selectoe universar para eliminar todos espacios que viene por defecto en los navegadores debido a las etiquetas*/ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     /*margin, border y padding pasan a formar parte del cálculo del ancho de la caja y no lo suman posteriormente*/
+}
+body {
+    height: 100vh;
+    /*background-color: blueviolet;*/
+}
+/*Login and register style begins*/
+.main{
+    display: flex;
+    flex-direction: column;
+    background-image: url('./images/registro_fondo.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 100vw;
+	height: 100vh;
+    padding: 5rem 0;
+    align-items: center;
+}
+
+.animal-pawnet {
+  
+    font-family: 'Jenna Sue', sans-serif;
+    font-weight: 250;
+    font-size: 13vw;   
+    margin: 1vw;     
+    text-shadow: 4px 4px 4px #C6CFFF;   
+}
+.section_login_register {
+    display: flex;
+    
+    background: rgba(198, 207, 255, 0.5);
+    border-radius: 18px;
+    flex-flow: column wrap;
+    padding: 3vw;
+    align-items: center;
+}
+
+.inputs {
+    width: 50vw;
+    height: 3vh;
+    margin-top: 8vw;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: rgba(198, 206, 255, 0);
+}
+
+.section-lines-hr {
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hr-sec-log{
+    height: 1px;
+    width: 35vw;
+    bottom: 10%;
+    background-color: black;
+    margin: 5%;
+    border: #000000;
+}
+
+.p{
+    margin-top: 1vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 550;
+    font-size: 4.5vw;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.register-buttons-div{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  }
+
+.login-button {
+    height: 6vh;
+    width: 40vw;
+    background: #C6CFFF;
+    border-radius: 18px;
+    font-family: 'Francois One';
+    font-size: 4.5vw;
+    color: #000000;
+    margin-top: 2vh;
+    margin-left: 4.5vw;
+}
+.google-login{
+    background-image: url('./googleB/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png');
+    width: 49vw;
+    height: 6.5vh;
+    background-size:100%;
+    border: none;
+    background-color: #FFFFFF;
+    margin-bottom: 4vh;
+}
+
+.google-login:hover{
+    background-image: url('./googleB/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png');
+    width: 49vw;
+    height: 6.5vh;
+    background-size:100%;
+    border: none;
+    background-color: #ffffff06;
+    background-repeat: no-repeat;
+}
+
+.text-register{
+    margin-bottom: 2vh;
+}
+.go-register-button {
+    height: 6vh;
+    width: 40vw;
+    background: #C6CFFF;
+    border-radius: 18px;
+    font-family: 'Francois One';
+    font-size: 4.5vw;
+    color: #000000;
+}
+.error{
+    margin-top: 5vw;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 4.5vw;
+    display: flex;
+    align-items: center;
+    color: #790252;  
+}
+/*Login and register style ends*/
+
+
+/*Differences between register and login page style begins*/
+
+.input-register {
+    width: 50vw;
+    height: 3vh;
+    margin-top: 17vw;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: rgba(198, 206, 255, 0);
+}
+
+.register-button{
+    height: 6vh;
+    width: 40vw;
+    margin-top: 30vw;
+    background: #C6CFFF;
+    border-radius: 18px;
+    font-family: 'Francois One';
+    font-size: 4.5vw;
+    color: #000000;
+    }
+    
+  /*Differences between register and login page style ends*/
+
+/*TIMELINE STYLES BEGIN*/
+.timeLineMainContainer{
+    min-width: 100vw;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+#mainContainer{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+   /* background-color:rgb(194, 199, 122);*/
+    justify-content: center;
+}
+.mainTimeline-Container{
+    /*background-color: aqua;*/
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+}
+.createPostTLContainer{
+    height: auto;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    /*background-color: rgb(74, 84, 92);*/
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.userPostPicture{
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+}
+.inputWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+.inputText{
+    width: 100%;
+    height: 6rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+}
+.postButton{
+    width: 8rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    background-color: #E8D3FF;
+    border: none;
+    border-radius: .5rem;
+}
+.postButton:hover{
+    width: 8rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    background-color: #C6CFFF;
+    border: none;
+    border-radius: .5rem;
+}
+.feedContainer{
+    width: 100%;
+    /*background-color: coral;*/
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;*/
+}
+.divider{
+    height: 5vh;
+}
+.userPost{
+   /* background-color: #790252;*/
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-size: 1.5rem;
+    height: 40vh;
+    width: 100%;
+}
+.userNameContainer{
+    height: 5rem;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+}
+.userPicture{
+    height: 3rem;
+    width: 3rem;
+}
+
+.iconsContainer{
+    height: 10vh;
+    width: 80%;
+   /* background-color: antiquewhite;*/
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.contentPostContainer{
+    height: auto; 
+    width: 80%;
+    min-height: 20vh;
+    font-size: 1rem;
+    border: 1px solid #000000;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-color: aquamarine;*/
+}
+
+.iconImages{
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+.saving-post{
+    height: 2rem;
+    width: 2rem;
+    display: none;
+    position: absolute;
+    left: 67vh;
+}
+
+.iconImages:hover{
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
+.iconEdit{
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+.iconEdit:hover{
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
+.iconLike{
+    width: 100%;
+    pointer-events: none;
+}
+
+.likes-container{
+ position: relative;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ cursor: pointer;
+ height: 2rem;
+ width: 2rem;
+}
+.likes-container:hover{
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
+.counter{
+    position: absolute;
+    z-index: 3;
+    font-size: .7em;
+}
+.navBar {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* border: 1rem solid green; */
+    padding: 0.3rem;
+    z-index: 4;
+}
+
+.navBarText{
+    font-size: 1rem;
+}
+.iconsNavBar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menuBarImages{
+    height: 2rem;
+    width: 2rem;
+}
+span{
+    pointer-events: none;
+}
+.delete-btns {
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 760px){
+   
+    .mainTimeline-Container{
+        width: 100vw;
+    }
+    
+}
